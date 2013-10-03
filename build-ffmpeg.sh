@@ -31,8 +31,7 @@ VERSION="2.0.1"
 ###########################################################################
 
 CURRENTPATH=`pwd`
-#ARCHS="i386 armv7 armv7s arm64"
-ARCHS="i386"
+ARCHS="i386 armv7 armv7s arm64"
 BUILDPATH="${CURRENTPATH}/build"
 LIBPATH="${CURRENTPATH}/lib"
 INCLUDEPATH="${CURRENTPATH}/include"
@@ -112,7 +111,7 @@ do
   # for target sdk version and platform. 
   make -j2 >> "${LOG}" 2>&1
 	make install >> "${LOG}" 2>&1
-	# make clean
+	make clean
   # >> "${LOG}" 2>&1
   
 	OUT_LIB_PATHS+="${OUTPATH}/lib "
