@@ -31,7 +31,7 @@ VERSION="2.0.1"
 ###########################################################################
 
 CURRENTPATH=`pwd`
-ARCHS="i386 armv7 armv7s arm64"
+ARCHS="i386 x86_64 armv7 armv7s arm64"
 BUILDPATH="${CURRENTPATH}/build"
 LIBPATH="${CURRENTPATH}/lib"
 INCLUDEPATH="${CURRENTPATH}/include"
