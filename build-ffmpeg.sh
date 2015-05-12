@@ -21,7 +21,7 @@
 ###########################################################################
 #  Change values here	(ffmpeg and iOS SDK version)												#
 #																		                                      #
-SDKVERSION="7.0"				                                                  
+SDKVERSION="8.1"				                                                  
 VERSION="2.0.1"         										                              
 #																		                                      #
 ###########################################################################
@@ -31,7 +31,7 @@ VERSION="2.0.1"
 ###########################################################################
 
 CURRENTPATH=`pwd`
-ARCHS="i386 armv7 armv7s arm64"
+ARCHS="i386 x86_64 armv7 armv7s arm64"
 BUILDPATH="${CURRENTPATH}/build"
 LIBPATH="${CURRENTPATH}/lib"
 INCLUDEPATH="${CURRENTPATH}/include"
@@ -71,15 +71,21 @@ cd "${SRCPATH}/ffmpeg-${VERSION}"
 
 for ARCH in ${ARCHS}
 do
-	if [ "${ARCH}" == "i386" ];
+	if [ "${ARCH}" == "i386" -o "${ARCH}" == "x86_64" ];
 	then
 		PLATFORM="iPhoneSimulator"
-		EXTRA_CONFIG="--arch=i386 --target-os=darwin --enable-cross-compile"
-    EXTRA_CFLAGS="-arch i386 -miphoneos-version-min=7.0"
+		if [ "${ARCH}" == "i386" ];
+		then
+			EXTRA_CONFIG="--arch=i386 --target-os=darwin --enable-cross-compile"
+    			EXTRA_CFLAGS="-arch i386 -miphoneos-version-min=7.0"
+    		else
+    			EXTRA_CONFIG="--arch=x86_64 --target-os=darwin --enable-cross-compile"
+    			EXTRA_CFLAGS="-arch x86_64 -miphoneos-version-min=7.0"
+    		fi
 	else
 		PLATFORM="iPhoneOS"
 		EXTRA_CONFIG="--arch=arm --target-os=darwin --enable-cross-compile --disable-armv5te"
-    EXTRA_CFLAGS="-w -arch ${ARCH} -miphoneos-version-min=7.0"
+    		EXTRA_CFLAGS="-w -arch ${ARCH} -miphoneos-version-min=7.0"
 	fi
 
   EXTRA_LDFLAGS="-miphoneos-version-min=7.0"  
